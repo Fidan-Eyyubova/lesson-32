@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import SearchBar from "./components/SearchBar";
+import SearchResult from "./components/SearchResult";
+import axios from "axios";
 
 function App() {
+  const [input, setInput] = useState("");
+  const [data, setData] = useState([]);
+  const [spinner, setSpinner] = useState(false);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    setSpinner(true);
+    
+    if (!!input) {
+      axios
+        .get(`https://api.datamuse.com/words?rel_trg=${input}`)
+        .then((res) => {
+          setData(res.data);
+          setSpinner(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setSpinner(false);
+        });
+    }
+    setInput("");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SearchBar
+        handleSearch={handleSearch}
+        input={input}
+        setInput={setInput}
+      />
+      <SearchResult data={data} spinner={spinner} />
     </div>
   );
 }

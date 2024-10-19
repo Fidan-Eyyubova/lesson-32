@@ -1,0 +1,34 @@
+body{
+    background-color: #FFE6A5;
+}
+.form{
+    background-color: #FFE6A5;
+    form{
+        button{
+            background-color: orange;
+            color: white;
+            width: 200px;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        input{
+            border: 1px solid grey;
+            width: 500px; 
+        }
+    }
+}
+
+.result{
+    background-color: #FFE6A5;
+    li{
+        list-style-type: none;
+        font-weight: bold;
+        font-size: 30px;
+        background-color: #F2E5BF;
+    }
+    ul{
+        padding-right: 30px;
+    }
+}
